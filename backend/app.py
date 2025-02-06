@@ -1,46 +1,126 @@
-from dotenv import load_dotenv
+
 from groclake.modellake import ModelLake
 import os
+import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, origins=["http://localhost:8000"])
 
 load_dotenv()
 
-os.environ['GROCLAKE_API_KEY'] = os.getenv('GROCLAKE_API_KEY')
-os.environ['GROCLAKE_ACCOUNT_ID'] = os.getenv('GROCLAKE_ACCOUNT_ID')
+# Set GrocLake API credentials
+os.environ['GROCLAKE_API_KEY'] = "c74d97b01eae257e44aa9d5bade97baf"
+os.environ['GROCLAKE_ACCOUNT_ID'] = "7431e04ba71289b9862100279768a0d8"
 
 # Initialize ModelLake
 model_lake = ModelLake()
 
-def get_response(user_input):
-    """Generates a spiritual response based on the user's query."""
+# Replace with your AviationStack API key
+AVIATIONSTACK_API_KEY = "3842cc0f4b4a0180f8af14907e39c199"
+
+# Replace with your RapidAPI key
+RAPIDAPI_KEY = "e46ee220dfmshe31151b886e99bfp186ee9jsn6eb76e66b2df"
+
+def get_flight_data():
+    """Fetches real-time flight data from AviationStack for flights from DEL to BOM."""
+    url = "http://api.aviationstack.com/v1/flights"
+    params = {
+        "access_key": AVIATIONSTACK_API_KEY,
+        "dep_iata": "DEL",  # Departure airport code for Delhi
+        "arr_iata": "BOM",  # Arrival airport code for Mumbai
+        "limit": 5  # Fetch data for 5 flights (adjust as needed)
+    }
     try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        return response.json().get("data", [])
+    except Exception as e:
+        print(f"Error fetching flight data: {e}")
+        return []
+
+def get_hotel_data(location):
+    """Fetches hotel data from RapidAPI's Travel Advisor API."""
+    url = "https://travel-advisor.p.rapidapi.com/hotels/list"
+    querystring = {
+        "location_id": "304554",  # Replace with the location ID for Mumbai (BOM)
+        "adults": "1",
+        "rooms": "1",
+        "nights": "2",
+        "offset": "0",
+        "currency": "USD",
+        "order": "asc",
+        "limit": "5",  # Fetch data for 5 hotels (adjust as needed)
+        "sort": "recommended",
+        "lang": "en_US"
+    }
+    headers = {
+        "X-RapidAPI-Key": RAPIDAPI_KEY,
+        "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com"
+    }
+    try:
+        response = requests.get(url, headers=headers, params=querystring)
+        response.raise_for_status()
+        return response.json().get("data", [])
+    except Exception as e:
+        print(f"Error fetching hotel data: {e}")
+        return []
+
+def get_travel_itinerary(user_input):
+    """Generates a travel itinerary based on the user's query, including flight and hotel data."""
+    try:
+        # Fetch flight data for DEL to BOM
+        flight_data = get_flight_data()
+
+        # Fetch hotel data for Mumbai (BOM)
+        hotel_data = get_hotel_data("Mumbai")
+
+        # Append flight data to the user's input
+        flight_info = "\n\nFlight Data (DEL to BOM):\n"
+        for flight in flight_data:
+            flight_info += (
+                f"Flight {flight['flight']['iata']} by {flight['airline']['name']} "
+                f"from {flight['departure']['airport']} to {flight['arrival']['airport']} "
+                f"(Scheduled: {flight['departure']['scheduled']})\n"
+            )
+
+        # Append hotel data to the user's input
+        hotel_info = "\n\nHotel Data (Mumbai):\n"
+        for hotel in hotel_data:
+            hotel_info += (
+                f"Hotel: {hotel['name']}, "
+                f"Rating: {hotel.get('rating', 'N/A')}, "
+                f"Price: {hotel.get('price', 'N/A')}, "
+                f"Checkout Time: {hotel.get('checkout_time', 'N/A')}\n"
+            )
+        end_mark = " also represent at the end all available flights including their costs and same for hotels"
+        user_input_with_data = user_input + flight_info + hotel_info + end_mark
+
         # Define the conversation context
         conversation = [
-            {"role": "system", "content": "You are a spiritual guide well-versed in the Bhagavad Gita and the Yoga Sutras. Provide meaningful and thoughtful guidance to the user."},
-            {"role": "user", "content": user_input}
+            {"role": "system", "content": "You are a travel planning assistant. Provide detailed and practical travel itineraries based on the user's preferences, flight data, and hotel data."},
+            {"role": "user", "content": user_input_with_data}
         ]
-        
-        # Generate response
-        response = model_lake.chat_complete({"messages": conversation, "max_tokens": 3000})
+
+        # Generate response using the LLM
+        response = model_lake.chat_complete({"messages": conversation, "token_size": 7000})
         return response.get('answer', "I'm sorry, I couldn't process that.")
-    
+
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
 @app.route('/chat', methods=['POST'])
-def chat():
+def plan_trip():
     data = request.get_json()
     user_message = data.get('message')
     if not user_message:
         return jsonify({"response": "I didn't receive any message."})
 
-    bot_reply = get_response(user_message)
-    return jsonify({"response": bot_reply})
+    # Get travel itinerary, including flight and hotel data
+    itinerary = get_travel_itinerary(user_message)
+    return jsonify({"response": itinerary})
 
 if __name__ == '__main__':
     app.run(debug=True)
