@@ -4,24 +4,35 @@ body {
   color: #333;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.chat-container {
-  max-width: 600px;
-  margin: 50px auto;
+.main-container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
   background: #ffffff;
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.chat-container {
+  flex: 2;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.chat-container h1 {
   text-align: center;
   color: #5a5a5a;
 }
 
 #chat-box {
-  max-height: 400px;
+  height: 70%;
   overflow-y: auto;
   padding: 10px;
   border: 1px solid #e0e0e0;
@@ -69,4 +80,88 @@ button {
 
 button:hover {
   background-color: #3d7d90;
+}
+
+.sidebar {
+  flex: 1;
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.menu-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #34495e;
+}
+
+.menu-item:hover {
+  background: #34495e;
+}
+
+.submenu {
+  display: none;
+  padding: 10px;
+  background: #34495e;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.submenu input, .submenu button {
+  margin: 5px 0;
+}
+
+#itinerary-controls, #bookings-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+#itinerary-controls input, #bookings-controls input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#itinerary-table, #bookings-list {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#itinerary-table {
+  border-collapse: collapse;
+}
+
+#itinerary-table th, #itinerary-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background: white;
+  color: #333;
+}
+
+#bookings-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#bookings-list li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  background: white;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+#bookings-list li input[type="checkbox"] {
+  margin-right: 10px;
 }

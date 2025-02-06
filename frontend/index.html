@@ -3,19 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spiritual Guide Chatbot</title>
+    <title>Travel Itinerary Chatbot</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="chat-container">
-        <h1>Spiritual Guide</h1>
-        <div id="chat-box">
-            <div class="message bot">Namaste! How may I guide you today?</div>
+    <div class="main-container">
+        <div class="chat-container">
+            <h1>Travel Assistant</h1>
+            <div id="chat-box">
+                <div class="message bot">Namaste! How may I assist you with your travel plans today?</div>
+            </div>
+            <form id="chat-form">
+                <input type="text" id="user-input" placeholder="Type your question here..." autocomplete="off">
+                <button type="submit">Send</button>
+            </form>
         </div>
-        <form id="chat-form">
-            <input type="text" id="user-input" placeholder="Type your question here..." autocomplete="off">
-            <button type="submit">Send</button>
-        </form>
+        <div class="sidebar">
+            <h1>Travel Planner</h1>
+            <div class="menu">
+                <div class="menu-item" onclick="toggleSubmenu('itinerary')">
+                    Itinerary
+                    <div id="itinerary-submenu" class="submenu">
+                        <div id="itinerary-controls">
+                            <input type="text" id="day-input" placeholder="Day (e.g., Day 1)">
+                            <input type="text" id="activity-input" placeholder="Activity (e.g., Arrive in Mumbai)">
+                            <button onclick="addActivity()">Add</button>
+                        </div>
+                        <table id="itinerary-table">
+                            <tr>
+                                <th>Day</th>
+                                <th>Activity</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="menu-item" onclick="toggleSubmenu('bookings')">
+                    Bookings
+                    <div id="bookings-submenu" class="submenu">
+                        <div id="bookings-controls">
+                            <input type="text" id="booking-type-input" placeholder="Booking Type (e.g., Flight)">
+                            <input type="text" id="booking-details-input" placeholder="Details (e.g., AI101 from Delhi)">
+                            <button onclick="addBooking()">Add</button>
+                        </div>
+                        <ul id="bookings-list">
+                            <!-- Bookings will be added here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

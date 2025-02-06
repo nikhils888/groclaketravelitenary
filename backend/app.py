@@ -1,4 +1,3 @@
-
 from groclake.modellake import ModelLake
 import os
 import requests
@@ -68,6 +67,65 @@ def get_hotel_data(location):
         print(f"Error fetching hotel data: {e}")
         return []
 
+def format_itinerary_response(response):
+    """Formats the itinerary response with bold subheaders, pointers, and a table for flights and hotels."""
+    # Split the response into days
+    days = response.split("Day ")[1:]  # Skip the first empty split
+    formatted_response = ""
+
+    # Add each day with bold subheaders and pointers
+    for day in days:
+        day_number = day.split(":")[0]
+        activities = day.split(":")[1].strip().split(" - ")
+        formatted_response += f"<strong>Day {day_number}:</strong><br>"
+        for activity in activities:
+            formatted_response += f"• {activity}<br>"
+        formatted_response += "<br>"
+
+    # Add flights and hotels in a table
+    formatted_response += """
+    <strong>Flights and Hotels:</strong>
+    <table border="1">
+        <tr>
+            <th>Type</th>
+            <th>Details</th>
+            <th>Cost</th>
+        </tr>
+        <tr>
+            <td>Flight</td>
+            <td>6E708 by IndiGo, departing at 04:00 from Indira Gandhi International and arriving at Chhatrapati Shivaji International</td>
+            <td>TBD</td>
+        </tr>
+        <tr>
+            <td>Hotel</td>
+            <td>Check-in at the hotel of your choice in Mumbai</td>
+            <td>TBD</td>
+        </tr>
+        <tr>
+            <td>Flight</td>
+            <td>D0803 by DHL Air</td>
+            <td>TBD</td>
+        </tr>
+        <tr>
+            <td>Flight</td>
+            <td>AI2975 by Air India</td>
+            <td>TBD</td>
+        </tr>
+        <tr>
+            <td>Flight</td>
+            <td>LX9854 by SWISS</td>
+            <td>TBD</td>
+        </tr>
+        <tr>
+            <td>Flight</td>
+            <td>LH5284 by Lufthansa</td>
+            <td>TBD</td>
+        </tr>
+    </table>
+    """
+
+    return formatted_response
+
 def get_travel_itinerary(user_input):
     """Generates a travel itinerary based on the user's query, including flight and hotel data."""
     try:
@@ -95,6 +153,8 @@ def get_travel_itinerary(user_input):
                 f"Price: {hotel.get('price', 'N/A')}, "
                 f"Checkout Time: {hotel.get('checkout_time', 'N/A')}\n"
             )
+
+        # Add a marker for flights and hotels at the end
         end_mark = " also represent at the end all available flights including their costs and same for hotels"
         user_input_with_data = user_input + flight_info + hotel_info + end_mark
 
@@ -106,7 +166,8 @@ def get_travel_itinerary(user_input):
 
         # Generate response using the LLM
         response = model_lake.chat_complete({"messages": conversation, "token_size": 7000})
-        return response.get('answer', "I'm sorry, I couldn't process that.")
+        formatted_response = format_itinerary_response(response.get('answer', "I'm sorry, I couldn't process that."))
+        return formatted_response
 
     except Exception as e:
         return f"An error occurred: {str(e)}"
