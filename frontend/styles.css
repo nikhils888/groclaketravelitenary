@@ -96,14 +96,37 @@ button:hover {
   font-size: 24px;
 }
 
-.menu-item {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #34495e;
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #34495e;
+  margin-bottom: 20px;
 }
 
-.menu-item:hover {
-  background: #34495e;
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ccc;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab.active {
+  color: white;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 3px;
+  background-color: #5c9ead;
+}
+
+.tab:hover {
+  color: white;
 }
 
 .submenu {
@@ -111,57 +134,112 @@ button:hover {
   padding: 10px;
   background: #34495e;
   border-radius: 5px;
-  margin-top: 10px;
 }
 
-.submenu input, .submenu button {
-  margin: 5px 0;
+.submenu.active {
+  display: block;
 }
 
 #itinerary-controls, #bookings-controls {
   display: flex;
-  flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
-}
-
-#itinerary-controls input, #bookings-controls input {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-#itinerary-table, #bookings-list {
-  width: 100%;
+  margin-bottom: 20px;  
   margin-top: 10px;
 }
 
-#itinerary-table {
-  border-collapse: collapse;
+#itinerary-controls input, #bookings-controls input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
 }
 
-#itinerary-table th, #itinerary-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
+#itinerary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #34495e; /* Match sidebar background */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#itinerary-table td {
+  border: 1px solid #2c3e50; /* Darker border for contrast */
+  padding: 12px;
   text-align: left;
-  background: white;
-  color: #333;
+  color: white; /* White text for visibility */
+  background-color: #34495e; /* Match sidebar background */
+  transition: background-color 0.3s ease;
+}
+
+#itinerary-table td.day-cell {
+  font-weight: bold; /* Make day numbers bold */
+  color: #5c9ead; /* Light blue for day numbers */
+  background-color: #34495e; /* Match sidebar background */
+  cursor: default; /* Non-editable */
+}
+
+#itinerary-table td.activity-cell {
+  background-color: #34495e; /* Match sidebar background */
+}
+
+#itinerary-table td.activity-cell:hover {
+  background-color: #3d7d90; /* Hover effect for activity cells */
+}
+
+#itinerary-table td.activity-cell:focus {
+  background-color: #5c9ead; /* Focus effect for activity cells */
+  outline: none;
+}
+
+#itinerary-table td.activity-cell[contenteditable="true"] {
+  cursor: text;
+}
+
+#itinerary-table td.activity-cell[contenteditable="true"]:empty::before {
+  content: attr(placeholder);
+  color: #999;
 }
 
 #bookings-list {
   list-style-type: none;
   padding: 0;
+  background-color: #34495e; /* Match sidebar background */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #bookings-list li {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-  background: white;
-  color: #333;
-  display: flex;
-  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #2c3e50; /* Darker border for contrast */
+  color: white; /* White text for visibility */
+  background-color: #34495e; /* Match sidebar background */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-#bookings-list li input[type="checkbox"] {
-  margin-right: 10px;
+#bookings-list li:hover {
+  background-color: #3d7d90; /* Hover effect */
+}
+
+#bookings-list li:focus {
+  background-color: #5c9ead; /* Focus effect */
+  outline: none;
+}
+
+#bookings-list li[contenteditable="true"] {
+  cursor: text;
+}
+
+#bookings-list li[contenteditable="true"]:empty::before {
+  content: attr(placeholder);
+  color: #999;
+}
+
+#visualizer-submenu {
+  text-align: center;
+  font-size: 18px;
+  color: #ccc;
 }

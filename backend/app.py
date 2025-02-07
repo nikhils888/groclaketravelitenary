@@ -62,6 +62,7 @@ def get_hotel_data(location):
     try:
         response = requests.get(url, headers=headers, params=querystring)
         response.raise_for_status()
+        print(response.json().get("data", []))
         return response.json().get("data", [])
     except Exception as e:
         print(f"Error fetching hotel data: {e}")
@@ -165,7 +166,7 @@ def get_travel_itinerary(user_input):
         ]
 
         # Generate response using the LLM
-        response = model_lake.chat_complete({"messages": conversation, "token_size": 7000})
+        response = model_lake.chat_complete({"messages": conversation, "token_size": 4000})
         formatted_response = format_itinerary_response(response.get('answer', "I'm sorry, I couldn't process that."))
         return formatted_response
 

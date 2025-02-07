@@ -20,36 +20,34 @@
         </div>
         <div class="sidebar">
             <h1>Travel Planner</h1>
-            <div class="menu">
-                <div class="menu-item" onclick="toggleSubmenu('itinerary')">
-                    Itinerary
-                    <div id="itinerary-submenu" class="submenu">
-                        <div id="itinerary-controls">
-                            <input type="text" id="day-input" placeholder="Day (e.g., Day 1)">
-                            <input type="text" id="activity-input" placeholder="Activity (e.g., Arrive in Mumbai)">
-                            <button onclick="addActivity()">Add</button>
-                        </div>
-                        <table id="itinerary-table">
-                            <tr>
-                                <th>Day</th>
-                                <th>Activity</th>
-                            </tr>
-                        </table>
-                    </div>
+            <div class="tabs">
+                <div class="tab active" id="itinerary-tab" onclick="showTab('itinerary')">Itinerary</div>
+                <div class="tab" id="bookings-tab" onclick="showTab('bookings')">Bookings</div>
+                <div class="tab" id="visualizer-tab" onclick="showTab('visualizer')">Visualizer</div>
+            </div>
+            <div id="itinerary-submenu" class="submenu active">
+                <div id="itinerary-controls">
+                    <input type="text" id="activity-input" placeholder="Activity (e.g., Arrive in Mumbai)">
+                    <button onclick="addActivity()">+ Add</button>
                 </div>
-                <div class="menu-item" onclick="toggleSubmenu('bookings')">
-                    Bookings
-                    <div id="bookings-submenu" class="submenu">
-                        <div id="bookings-controls">
-                            <input type="text" id="booking-type-input" placeholder="Booking Type (e.g., Flight)">
-                            <input type="text" id="booking-details-input" placeholder="Details (e.g., AI101 from Delhi)">
-                            <button onclick="addBooking()">Add</button>
-                        </div>
-                        <ul id="bookings-list">
-                            <!-- Bookings will be added here -->
-                        </ul>
-                    </div>
+                <table id="itinerary-table">
+                    <tbody>
+                        <!-- Rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="bookings-submenu" class="submenu">
+                <div id="bookings-controls">
+                    <input type="text" id="booking-type-input" placeholder="Booking Type (e.g., Flight)">
+                    <input type="text" id="booking-details-input" placeholder="Details (e.g., AI101 from Delhi)">
+                    <button onclick="addBooking()">+ Add</button>
                 </div>
+                <ul id="bookings-list">
+                    <!-- Bookings will be added here -->
+                </ul>
+            </div>
+            <div id="visualizer-submenu" class="submenu">
+                <p>Coming Soon</p>
             </div>
         </div>
     </div>

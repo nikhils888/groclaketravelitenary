@@ -1,41 +1,50 @@
-// Toggle submenus
-function toggleSubmenu(id) {
-  const submenu = document.getElementById(`${id}-submenu`);
-  submenu.style.display = submenu.style.display === "block" ? "none" : "block";
-}
+let dayCounter = 1;
 
-// Stop event propagation for submenu elements
-document.querySelectorAll(".submenu input, .submenu button").forEach(element => {
-  element.addEventListener("click", (e) => {
-      e.stopPropagation();
-  });
-});
+// Show the selected tab and hide others
+function showTab(tabId) {
+    const tabs = document.querySelectorAll(".tab");
+    const submenus = document.querySelectorAll(".submenu");
+
+    tabs.forEach(tab => tab.classList.remove("active"));
+    submenus.forEach(submenu => submenu.classList.remove("active"));
+
+    document.getElementById(`${tabId}-tab`).classList.add("active");
+    document.getElementById(`${tabId}-submenu`).classList.add("active");
+}
 
 // Add activity to itinerary
 function addActivity() {
-  const dayInput = document.getElementById("day-input");
-  const activityInput = document.getElementById("activity-input");
-  const day = dayInput.value.trim();
-  const activity = activityInput.value.trim();
+    const activityInput = document.getElementById("activity-input");
+    const activity = activityInput.value.trim();
 
-  if (day === "" || activity === "") {
-      alert("Please enter both day and activity.");
-      return;
-  }
+    if (activity === "") {
+        alert("Please enter an activity.");
+        return;
+    }
 
-  const table = document.getElementById("itinerary-table");
-  const row = table.insertRow(-1);
-  const dayCell = row.insertCell(0);
-  const activityCell = row.insertCell(1);
+    const tableBody = document.querySelector("#itinerary-table tbody");
+    const row = tableBody.insertRow(-1);
 
-  dayCell.textContent = day;
-  activityCell.textContent = activity;
+    // Add non-editable day cell
+    const dayCell = row.insertCell(0);
+    dayCell.classList.add("day-cell");
+    dayCell.textContent = `Day ${dayCounter}`;
 
-  // Clear inputs
-  dayInput.value = "";
-  activityInput.value = "";
+    // Add editable activity cell
+    const activityCell = row.insertCell(1);
+    activityCell.classList.add("activity-cell");
+    activityCell.contentEditable = true;
+    activityCell.placeholder = "Enter activity";
+    activityCell.textContent = activity;
+
+    // Increment day counter
+    dayCounter++;
+
+    // Clear activity input
+    activityInput.value = "";
 }
 
+// Add booking to bookings list
 // Add booking to bookings list
 function addBooking() {
   const bookingTypeInput = document.getElementById("booking-type-input");
@@ -58,6 +67,17 @@ function addBooking() {
   `;
   list.appendChild(listItem);
 
+  // Make the booking item editable on double-click
+  listItem.addEventListener("dblclick", () => {
+      listItem.contentEditable = true;
+      listItem.focus();
+  });
+
+  // Save changes when the user finishes editing
+  listItem.addEventListener("blur", () => {
+      listItem.contentEditable = false;
+  });
+
   // Clear inputs
   bookingTypeInput.value = "";
   bookingDetailsInput.value = "";
@@ -65,34 +85,37 @@ function addBooking() {
 
 // Handle chat form submission
 document.getElementById("chat-form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const userInput = document.getElementById("user-input").value;
+    e.preventDefault();
+    const userInput = document.getElementById("user-input").value;
 
-  if (userInput.trim() === "") return;
+    if (userInput.trim() === "") return;
 
-  // Display user message
-  const chatBox = document.getElementById("chat-box");
-  chatBox.innerHTML += `<div class="message user">${userInput}</div>`;
-  document.getElementById("user-input").value = "";
-  chatBox.scrollTop = chatBox.scrollHeight;
+    // Display user message
+    const chatBox = document.getElementById("chat-box");
+    chatBox.innerHTML += `<div class="message user">${userInput}</div>`;
+    document.getElementById("user-input").value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-  // Send message to backend
-  try {
-      const response = await fetch("http://127.0.0.1:5000/chat", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: userInput }),
-      });
+    // Send message to backend
+    try {
+        const response = await fetch("http://127.0.0.1:5000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: userInput }),
+        });
 
-      const data = await response.json();
-      const botReply = data.response;
+        const data = await response.json();
+        const botReply = data.response;
 
-      // Display bot response
-      chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-  } catch (error) {
-      console.error("Error:", error);
-  }
+        // Display bot response
+        chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+        console.error("Error:", error);
+    }
 });
+
+// Show the Itinerary tab by default
+showTab("itinerary");
