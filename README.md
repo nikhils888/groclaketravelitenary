@@ -72,4 +72,13 @@ The bot includes an **interactive visualizer** that provides a **quick overview*
 
 This feature helps travelers make informed decisions at a glance, improving the overall trip experience.  
 
+### 📋 One-Click "Copy to Itinerary" Feature  
+
+The bot offers a **seamless itinerary integration** with a **one-click "Copy to Itinerary"** option. This allows users to:  
+
+- **Automatically transfer AI-generated itineraries** under the itinerary tab, eliminating the need for manual entry.  
+- **Effortlessly update trip details**, ensuring all recommendations and schedule adjustments are reflected in real time.  
+- **Dynamically add required bookings**, intelligently detecting and appending necessary reservations, so users can track and manage them easily.  
+
+By leveraging structured **data pipelines** and **real-time itinerary synchronization**, this feature ensures a **frictionless travel planning experience** while keeping bookings and schedules **cohesive and up to date**.  
 
