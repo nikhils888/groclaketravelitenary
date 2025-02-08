@@ -1,4 +1,4 @@
-![WhatsApp Image 2025-02-08 at 23 10 32_93d3d83b](https://github.com/user-attachments/assets/6f5d22a7-e757-4a18-a7e3-b3815b47bbaf)# Travel Itinerary Chat-Bot
+# Travel Itinerary Chat-Bot
 Welcome to the **Travel Itinerary Bot** repository! Built using advanced **Groclake** tools and libraries, including **ModelLake** and **DataLake**, this project is designed to help users create and manage travel itineraries with ease. The bot provides a user-friendly interface for planning trips, adding activities, and managing bookings efficiently.  
 
 ## 🚀 Powered by Advanced Groclake Tools  
