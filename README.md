@@ -62,5 +62,14 @@ Powered by **ModelLake**, the bot supports **multiple languages**, allowing user
   <img src="https://github.com/user-attachments/assets/d188ed92-5d37-4c45-b08e-5e6422b8adc3" alt="Travel Itinerary Bot Screenshot 1" width="65%"/>
 </p>
 
+### 🗺️ Visualizer for Destination Insights  
+
+The bot includes an **interactive visualizer** that provides a **quick overview** of destinations, accommodations, and attractions. Users can:  
+
+- **See a snapshot of their trip** with mapped locations.  
+- **Get AI-curated images and recommendations** for their itinerary.  
+- **Enhance trip planning** with a visual representation of their stay.  
+
+This feature helps travelers make informed decisions at a glance, improving the overall trip experience.  
 
 
