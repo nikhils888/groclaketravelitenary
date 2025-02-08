@@ -74,10 +74,10 @@ This feature helps travelers make informed decisions at a glance, improving the 
 
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/c2881087-176e-4e82-babd-940a0dde360d" alt="Travel Itinerary Bot Screenshot 1" width="45%"/>
-  <img src="https://github.com/user-attachments/assets/2fdd9fad-7b58-4baf-acf3-3ffda02611c8" alt="Travel Itinerary Bot Screenshot 2" width="45%"/>
-  <img src="https://github.com/user-attachments/assets/2c3b81af-4fe1-4be0-9839-a3aa0f079a4e" alt="Travel Itinerary Bot Screenshot 2" width="45%"/>
-  <img src="https://github.com/user-attachments/assets/d231c5fb-adf1-4ad6-bf0b-e3d99b017b1c" alt="Travel Itinerary Bot Screenshot 2" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/c2881087-176e-4e82-babd-940a0dde360d" alt="Travel Itinerary Bot Screenshot 1" width="20%"/>
+  <img src="https://github.com/user-attachments/assets/2fdd9fad-7b58-4baf-acf3-3ffda02611c8" alt="Travel Itinerary Bot Screenshot 2" width="20%"/>
+  <img src="https://github.com/user-attachments/assets/2c3b81af-4fe1-4be0-9839-a3aa0f079a4e" alt="Travel Itinerary Bot Screenshot 2" width="20%"/>
+  <img src="https://github.com/user-attachments/assets/d231c5fb-adf1-4ad6-bf0b-e3d99b017b1c" alt="Travel Itinerary Bot Screenshot 2" width="20%"/>
   
 </p>
 
