@@ -12,9 +12,9 @@ body {
 
 .main-container {
   display: flex;
-  width: 90%;
-  max-width: 1200px;
-  height: 80vh;
+  width: 100%;
+  /* max-width: 1200px; */
+  height: 100%;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -50,11 +50,15 @@ body {
 .bot {
   background: #e6f7ff;
   text-align: left;
+  word-wrap: break-word; 
+  justify-self: left;
 }
 
 .user {
   background: #d9f7be;
   text-align: right;
+  word-wrap: break-word; 
+  justify-self: right;
 }
 
 form {

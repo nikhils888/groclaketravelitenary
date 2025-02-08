@@ -6,7 +6,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:8000"])
+CORS(app, origins=["http://localhost:7001"])
 
 load_dotenv()
 
@@ -18,7 +18,7 @@ os.environ['GROCLAKE_ACCOUNT_ID'] = "7431e04ba71289b9862100279768a0d8"
 model_lake = ModelLake()
 
 # Replace with your AviationStack API key
-AVIATIONSTACK_API_KEY = "3842cc0f4b4a0180f8af14907e39c199"
+AVIATIONSTACK_API_KEY = "2a349d2a63b04d6e3e74a5e68999d676"
 
 # Replace with your RapidAPI key
 RAPIDAPI_KEY = "e46ee220dfmshe31151b886e99bfp186ee9jsn6eb76e66b2df"
@@ -35,8 +35,10 @@ def get_flight_data():
     try:
         response = requests.get(url, params=params)
         response.raise_for_status()
+        print(response.json())
         return response.json().get("data", [])
     except Exception as e:
+        print("bvuvbjubbujnbjunkjnbkjbnkjbnkjbkjbjbjkjbkj")
         print(f"Error fetching flight data: {e}")
         return []
 
@@ -49,7 +51,7 @@ def get_hotel_data(location):
         "rooms": "1",
         "nights": "2",
         "offset": "0",
-        "currency": "USD",
+        "currency": "INR",
         "order": "asc",
         "limit": "5",  # Fetch data for 5 hotels (adjust as needed)
         "sort": "recommended",
@@ -62,6 +64,7 @@ def get_hotel_data(location):
     try:
         response = requests.get(url, headers=headers, params=querystring)
         response.raise_for_status()
+        print("hotel data .............................................")
         print(response.json().get("data", []))
         return response.json().get("data", [])
     except Exception as e:
@@ -132,10 +135,12 @@ def get_travel_itinerary(user_input):
     try:
         # Fetch flight data for DEL to BOM
         flight_data = get_flight_data()
-
+        print("flight data .............................................")
+        print(flight_data)
         # Fetch hotel data for Mumbai (BOM)
         hotel_data = get_hotel_data("Mumbai")
-
+        print("hotel data .............................................")
+        print(hotel_data)
         # Append flight data to the user's input
         flight_info = "\n\nFlight Data (DEL to BOM):\n"
         for flight in flight_data:
@@ -156,8 +161,9 @@ def get_travel_itinerary(user_input):
             )
 
         # Add a marker for flights and hotels at the end
-        end_mark = " also represent at the end all available flights including their costs and same for hotels"
+        end_mark = " also represent at the end all available flights including their costs and same for hotels . also represent flight timings and other details and respectively more details for hotels"
         user_input_with_data = user_input + flight_info + hotel_info + end_mark
+        print(user_input_with_data)
 
         # Define the conversation context
         conversation = [
@@ -168,7 +174,7 @@ def get_travel_itinerary(user_input):
         # Generate response using the LLM
         response = model_lake.chat_complete({"messages": conversation, "token_size": 4000})
         formatted_response = format_itinerary_response(response.get('answer', "I'm sorry, I couldn't process that."))
-        return formatted_response
+        return response.get('answer', "I'm sorry, I couldn't process that.")
 
     except Exception as e:
         return f"An error occurred: {str(e)}"

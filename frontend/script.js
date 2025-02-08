@@ -108,10 +108,21 @@ document.getElementById("chat-form").addEventListener("submit", async function (
 
         const data = await response.json();
         const botReply = data.response;
+        const botMessage = document.createElement("div");
+        botMessage.classList.add("message", "bot");
+
+        const formattedReply = botReply
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") 
+        .replace(/\n/g, "<br>"); 
+
+        botMessage.innerHTML = formattedReply; 
+        chatBox.appendChild(botMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
 
         // Display bot response
-        chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        // chatBox.innerHTML += `<div class="message bot">${botReply}</div>`;
+        // chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
         console.error("Error:", error);
     }
