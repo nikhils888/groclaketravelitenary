@@ -53,6 +53,7 @@ This approach makes **trip planning, organization, and execution seamless**, eli
   <img src="https://github.com/user-attachments/assets/9081353e-4637-444d-a0fe-7d732848918c" alt="Travel Itinerary Bot Screenshot 1" width="45%"/>
   <img src="https://github.com/user-attachments/assets/2eb7b669-2fc6-415c-8d80-3aa0430d942a" alt="Travel Itinerary Bot Screenshot 2" width="45%"/>
 </p>
+
 ### 🌍 Multilingual Support  
 
 Powered by **ModelLake**, the bot supports **multiple languages**, allowing users to **plan trips, manage bookings, and translate itineraries seamlessly**. This ensures a **localized, user-friendly experience**, making travel planning accessible worldwide.  
