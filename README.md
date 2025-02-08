@@ -49,7 +49,10 @@ The bot provides a structured way to manage travel plans using **table-based day
 
 This approach makes **trip planning, organization, and execution seamless**, eliminating the need for manual tracking and fragmented scheduling.  
 
-![WhatsApp Image 2025-02-08 at 22 57 44_1051f744](https://github.com/user-attachments/assets/9081353e-4637-444d-a0fe-7d732848918c) ![WhatsApp Image 2025-02-08 at 22 55 29_ae110ca1](https://github.com/user-attachments/assets/2eb7b669-2fc6-415c-8d80-3aa0430d942a)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9081353e-4637-444d-a0fe-7d732848918c" alt="Travel Itinerary Bot Screenshot 1" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/2eb7b669-2fc6-415c-8d80-3aa0430d942a" alt="Travel Itinerary Bot Screenshot 2" width="45%"/>
+</p>
 
 
 
