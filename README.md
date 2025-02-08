@@ -90,7 +90,12 @@ The bot offers a **seamless itinerary integration** with a **one-click "Copy to 
 - **Effortlessly update trip details**, ensuring all recommendations and schedule adjustments are reflected in real time.  
 - **Dynamically add required bookings**, intelligently detecting and appending necessary reservations, so users can track and manage them easily.  
 
-By leveraging structured **data pipelines** and **real-time itinerary synchronization**, this feature ensures a **frictionless travel planning experience** while keeping bookings and schedules **cohesive and up to date**.  
+By leveraging structured **data pipelines** and **real-time itinerary synchronization**, this feature ensures a **frictionless travel planning experience** while keeping bookings and schedules **cohesive and up to date**.  \
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bc0a8af1-28ac-4b18-8cf0-836c3c9041cd" alt="Travel Itinerary Bot Screenshot 1" width="65%"/>
+</p>
+
 
 ## 🔮 Future Prospects  
 
