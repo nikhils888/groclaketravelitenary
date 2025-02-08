@@ -27,5 +27,27 @@ The **Travel Itinerary Bot** bridges this gap by offering an **AI-powered, multi
 
   ![WhatsApp Image 2025-02-08 at 22 59 00_6ce79e05](https://github.com/user-attachments/assets/ebbfc363-df65-4c32-a54b-ca9bdcbb382c)
 
+## 🌟 Key Features
+
+### ✨ Agentic AI Chat Engine (Powered by GPT-4 & Groclake ModelLake)  
+
+Our travel assistant is built using **GPT-4** and **ModelLake**, a powerful model warehouse from **Groclake**, enabling advanced **LLM function calls** for:  
+
+- **Conversational travel planning** through chat-based interactions.  
+- **Seamless language-related tasks**, including itinerary summarization, translation, and travel recommendations.  
+- **Real-time AI-powered responses**, ensuring up-to-date and accurate travel insights.  
+
+Using **ModelLake**, the bot intelligently **processes user inputs**, generates structured travel plans, and adapts based on preferences and booking details.  
+
+### 📅 Itinerary & Booking Management  
+
+The bot provides a structured way to manage travel plans using **table-based day-wise itinerary structuring**:  
+
+- **Daily itinerary tables**, allowing users to organize trips efficiently.  
+- **Checklists for important bookings**, ensuring tracking of **completed and pending** reservations.  
+- **Automated updates**—whenever an activity is booked, it is reflected in the itinerary automatically.  
+
+This approach makes **trip planning, organization, and execution seamless**, eliminating the need for manual tracking and fragmented scheduling.  
+
 
 
