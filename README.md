@@ -110,4 +110,10 @@ We plan to enhance the **Travel Itinerary Bot** with advanced AI-driven features
 
 These upgrades will ensure a **more immersive, intelligent, and personalized** travel planning experience, leveraging cutting-edge AI and data-driven insights. 🚀  
 
+## 📂 Project File Structure  
+
+The project follows a **structured architecture** with a **Flask backend** and a separate **frontend** for seamless interaction. The **Flask backend (`app.py`)** handles **API requests, processes user inputs, integrates AI functionalities, and manages itinerary data**, while the frontend provides an **interactive user interface**.  
+
+
+
 
